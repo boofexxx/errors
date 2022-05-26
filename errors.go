@@ -64,6 +64,10 @@ func (e *Error) Error() string {
 	return b.String()
 }
 
+func (e *Error) Unwrap() error {
+	return e.Err
+}
+
 func (e *Error) isZero() bool {
 	return e.Op == "" && e.Msg == "" && e.info == "" && e.Err == nil
 }
@@ -110,4 +114,14 @@ func pad(b *bytes.Buffer, str string) {
 		return
 	}
 	b.WriteString(str)
+}
+
+// Innermost returns innermost error by unwrapping
+func Innermost(err error) error {
+	next := err
+	for next != nil {
+		err = next
+		next = Unwrap(err)
+	}
+	return err
 }
