@@ -10,6 +10,9 @@ import (
 )
 
 func info() string {
-	_, file, line, _ := runtime.Caller(2)
+	_, file, line, ok := runtime.Caller(2)
+	if !ok {
+		return "???:???"
+	}
 	return fmt.Sprintf("%s:%d", path.Base(file), line)
 }
