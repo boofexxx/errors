@@ -20,7 +20,7 @@ var (
 
 type Error struct {
 	// Op is the operation being performed, usually the name of the method
-	// being invoked (Get, Put, etc.). It should not contain an at sign @.
+	// being invoked (Get, Put, etc.)
 	Op Op
 	// Handwrited message that appears after Op
 	Msg string
